@@ -28,4 +28,8 @@ The null option does concern your database.  Setting null=True is the option tha
     
 ====== Make our own app: Views for each aspect of "CRUD" ======
 
-   It has a common set of things the web application has to do: Authentication and CRUD
+4. http request, url.py and view.py
+    - Each click of user on the web will make a http request
+    - url.py functions to recognize each url of http request and route it to a proper view function to render a web page
+        - note, if you have include function to include app specific url in app folder, make sure not to use "$" sign at the end in the main url pattern.
+    - view.py fucntions for controling each view of web pages. Each function/class in view.py take a request as an argument, html template, and context variables, render it and return a http response.  
