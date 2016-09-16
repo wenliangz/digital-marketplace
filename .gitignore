@@ -5,3 +5,14 @@ lib/
 .Python
 *.py[cod]
 pip-selfcheck.json
+.idea/deployment.xml
+.idea/digital-marketplace.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+Scripts/
+src/db.sqlite3
+src/digitalmarket/__pycache__/
+src/products/
+tcl/
