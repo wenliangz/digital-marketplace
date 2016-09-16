@@ -1,4 +1,6 @@
+
 ====== Django Admin app: Views of "CRUD" ======
+
 
 1. model registration
     - In order for your model to show up in the admin app, you have to import and register the model
@@ -26,3 +28,4 @@ The null option does concern your database.  Setting null=True is the option tha
     
 ====== Make our own app: Views for each aspect of "CRUD" ======
 
+   It has a common set of things the web application has to do: Authentication and CRUD
