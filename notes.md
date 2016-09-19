@@ -121,5 +121,14 @@ Just like django ModelAdmin class, take use of existing models, to display field
 - Applications of the relationship:
     - Editing and creating permission
     - Login and staff required mixin
+    
+# ===== Statics and Media Files  =========
+# 16. static files
+# 17. media files
+# 18. media file download
+- return **httpresponse object** with no html format
+  - create a header to tell browser: Content-Disposition; X-SendFile
+- django FileWrapper for downloading big files
+    
  
  
