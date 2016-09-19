@@ -97,3 +97,10 @@ Just like django ModelAdmin class, take use of existing models, to display field
  #---- Update View -----
  The update view is similar like create view and detail view, except that we can edit the item. So in the update view, 
  - we will also need a form for updating item. What's different from create view is that we need to pass an instance of data model to the form for editing. 
+ 
+ 
+ # =========== Class Based View (CBV) ==============
+ - CBV allow you to structure your views and reuse code by harnessing inheritance and mixins.
+ - Django has built-in **class-based generic views** , which also inherit from **base classes** and different **mixins**.  Therefore, when we build our own class based view inherited from django class-based generic views, and  we have many hooks in the form of default **method**implementations and **attributes** that we are unlikely to be concerned with in the simplest use cases. However, we can override the default method or attribute for maximum flexibility.
+ - Use custome Mixins: Mixins are a form of multiple inheritance where behaviors and attributes of multiple parent classes can be combined.Mixins are an excellent way of reusing code across multiple classes, but they come with some cost. The more your code is scattered among mixins, the harder it will be to read a child class and know what exactly it is doing
+ 

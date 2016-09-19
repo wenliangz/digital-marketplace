@@ -12,7 +12,4 @@ pip-selfcheck.json
 .idea/modules.xml
 .idea/workspace.xml
 Scripts/
-src/db.sqlite3
-src/digitalmarket/__pycache__/
-src/products/
 tcl/
