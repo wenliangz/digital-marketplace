@@ -125,10 +125,26 @@ Just like django ModelAdmin class, take use of existing models, to display field
 # ===== Statics and Media Files  =========
 # 16. static files
 # 17. media files
-# 18. media file download
-- return **httpresponse object** with no html format
-  - create a header to tell browser: Content-Disposition; X-SendFile
-- django FileWrapper for downloading big files
+- media file download
+    - return **httpresponse object** with no html format;
+    - create a header to tell browser: Content-Disposition; X-SendFile
+    - django FileWrapper for downloading big files
+- product download permission
+# ImageField
+
+# ============ Template and view/function improvement  =======
+# 18. Simple Search
+-  simple version search 
+-  third party app for advance search, ref eCommence.
+# 19. Template improvement Tags & Filter
+- give the list of content a dive class and define a CSS for it
+- get_absolute_url for the product in the list in the template
+- template tags and filter: eg. truncate descriptions to make it look better
+# 20. Tabular Inlines (like the portable table in filemaker)
+- one products may have different thumnails. So make a seperate thumnail modle and relate it to the products.
+- first need a relation for tabular inline 
+- make tabular inlines in the admin view
+
     
  
  
