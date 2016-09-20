@@ -170,10 +170,62 @@ form.instance.managers.add(user)
 - template tags and filter: eg. truncate descriptions to make it look better
 
 ##3. Tabular Inlines (like the portable table in filemaker)
-- one products may have different thumnails. So make a seperate thumnail modle and relate it to the products.
+- one products may have different thumnails. So make a seperate thumnail model and relate it to the products.
 - first need a relation for tabular inline 
 - make tabular inlines in the admin view
 
-    
+##4. Custome template tags
+- much like a function, take an instance and variable and return new value
+- register the function as template tags
+- create folder called, templatetags, and __init__.py file. Put the template tag inside the folder.
+- the custome tag is then available to use in the template in the format of "instance|tags: variable"
+
+# ==================database logic and post-signal=======================
+
+##1. Auto Generate Thumbnail
+- product_post_save_receiver in the model
+- create_new_thumb() function to make code more dry
+
+# ================== Tags app ==============
+ Tag products for use of recommendations, look products under the same tag ...etc
+## 1. Create tag model,understand relationship and know how to query through relationship
+- Create a tag model that has many to many relationship with product: 
+    - one tag can be given to many different products; 
+    - one products can have multiple tags
+- Product and thumnail have one-to-many relationship
+- Know how to query via relationships
  
+##2. Create records in tag table from the product table(many-to-many relation)
+- First, you need to create a tag field in the product form view(updateview and createview). This tag field can be regular form field not from the product model, just for collect user input and will be saved into tag model by querying through relations.
+- Second, override the form_valid() method in the CBVs. get the tag data from cleaned_data and save them to the tag table. Note, in order for tags to be updated, clear previous values before setting new values.
+```
+def form_valid(self, form):
+    valid_data = super(ProductUpdateView,self).form_valid(form)
+    tags = form.cleaned_data.get('tags')
+    obj =self.get_object()
+    obj.tag_set.clear()  # clear previous values if there are, before set new values
+    if tags:
+        tag_list = tags.split(',')
+        for tag in tag_list:
+            new_tag = Tag.objects.get_or_create(title=str(tag).split()[0]  # add title data to tag table
+            new_tag.products.add(self.get_object())  # add product data to tag table
+     return valid_data
+```
+- In the product UpdateView, we need to get intial tag values from the tag table so that we can update the tags.
+```
+def get_initial(self):
+    initial = super(ProductUpdateview,self).get_initial()
+    tags = self.get_object().tag_set.all()
+    initial['tag'] = ';'.join(x.title for x in tags)
+    return initial
+  
+```
+  
+- model manager and queryset in the CBV view
+    - override the get_queryset() method by returning different queryset you need
+
+# =====================Analytics App======================
+We are going to build a model for doing some analytics for the tag usage for simple recommendation purposes. As this analytic model are potential useful for doing other analytics. We separate it out as a new App.
+  
+
  
