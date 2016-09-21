@@ -207,8 +207,8 @@ def form_valid(self, form):
     if tags:
         tag_list = tags.split(',')
         for tag in tag_list:
-            new_tag = Tag.objects.get_or_create(title=str(tag).split()[0]  # add title data to tag table
-            new_tag.products.add(self.get_object())  # add product data to tag table
+            new_tag = Tag.objects.get_or_create(title=str(tag).split()[0]  # add tag title to tag table by model manager
+            new_tag.products.add(self.get_object())  # add product data to tag table through relations
      return valid_data
 ```
 - In the product UpdateView, we need to get intial tag values from the tag table so that we can update the tags.
@@ -224,8 +224,18 @@ def get_initial(self):
 - model manager and queryset in the CBV view
     - override the get_queryset() method by returning different queryset you need
 
-# =====================Analytics App======================
+# ==============Analytics App=================
 We are going to build a model for doing some analytics for the tag usage for simple recommendation purposes. As this analytic model are potential useful for doing other analytics. We separate it out as a new App.
   
+##1. Create TagView model with user, tag and count fields
 
- 
+##2. Count tags 
+in view everytime when called:
+- in TagDetailView, override get_context_data() method, everytime it is called, use **get_or_create() method** of the TagView model manager to get an instance of TagView if there is or create new one, and increase count by one  
+-  Do the same to the product detailview
+in the model:
+- instead of count tags in view, we can also define a custom manager in TagView model and method to do the count. 
+
+#========= Build a dashboard view for recommendations=========
+Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it.
+
