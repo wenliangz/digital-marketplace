@@ -239,3 +239,16 @@ in the model:
 #========= Build a dashboard view for recommendations=========
 Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it.
 
+##1. Create a class based DashBoardView from standard generic view. First, thinking about what data you want to display on the view. and then build the view class
+- tags in the reverse order of counts
+- products associated with those tags (main things for recommendations)
+- simulate some randomness on the products recommended
+
+##2. User Interface:
+- modify the base.html
+    - create a nav bar: 
+    ```
+    <nav class='main-nav'>
+    <li><a href='#'>Digital Marketplace</a>
+    </nav>
+    ```
