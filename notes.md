@@ -231,7 +231,7 @@ We are going to build a model for doing some analytics for the tag usage for sim
 
 ##2. Count tags 
 in view everytime when called:
-- in TagDetailView, override get_context_data() method, everytime it is called, use **get_or_create() method** of the TagView model manager to get an instance of TagView if there is or create new one, and increase count by one  
+- in TagDetailView, override get_context_data() method, everytime it is called, use **get_or_create() method** of the TagView model manager to get an instance of TagView if there is or create new one, and increase count by one
 -  Do the same to the product detailview
 in the model:
 - instead of count tags in view, we can also define a custom manager in TagView model and method to do the count. 
@@ -239,16 +239,50 @@ in the model:
 #========= Build a dashboard view for recommendations=========
 Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it.
 
-##1. Create a class based DashBoardView from standard generic view. First, thinking about what data you want to display on the view. and then build the view class
+##1. Create a class based DashBoardView.py from standard generic view. First, thinking about what data you want to display on the view. and then build the view class
 - tags in the reverse order of counts
 - products associated with those tags (main things for recommendations)
 - simulate some randomness on the products recommended
 
-##2. User Interface:
-- modify the base.html
-    - create a nav bar: 
-    ```
-    <nav class='main-nav'>
-    <li><a href='#'>Digital Marketplace</a>
-    </nav>
-    ```
+##2. User Interface on the dashboard: 
+- creating a **nav bar**
+    - add it in the base.html, which make it to show up on every page.
+    - creating a nav bar with CSS formatting
+- add **suggested product list**
+    - create a **product_list_snippet.html** from product list, so that it can be included into different views
+    - include the product_list_snippet.htm in the dashboard view.html
+- Add **top tags** into the dashboard view
+- using CSS for clearing the dashboard
+- logic for showing download, preview and purchase button 
+
+##3. url template tag: {% url %}
+two ways of using dynamic url in the template:
+- href = "{{instance.get_absolute_url}}", need to define get_absolute_url function in the model
+- href = '{% url "namespace:urlname" %}'
+Note: {{request.build_absolute_uri}} could be used to build the whole url address, but not necessary, because once you build the relative link, the browser will be able to figure out the whole address.
+
+
+# ====== Build Purchase Functions with jQuery UI and Ajax ====
+
+Purchase Dialog is different from shopping cart(refer to ecommerce) 
+##1. jQuery user interface(UI) library: Dialog Modal
+- copy jQuery CDN and UI CDN into the base.html
+- copy jQuery CSS into base.html
+- add a script block right after jQuery CDN, and in the product detail view, write the block of code.
+- create a confirm purchase div with style='display:none'; use the jquery to load in the dialog once the button is clicked
+
+##2.Overview of Ajax: 
+AJAX stands for Asynchronous JavaScript and XML. In a nutshell, it is the use of the XMLHttpRequest object to communicate with server-side scripts. It can send as well as receive information in a variety of formats, including JSON, XML, HTML, and even text files. AJAX’s most appealing characteristic, however, is its "asynchronous" nature, which means it can do all of this without having to refresh the page. This lets you update portions of a page based upon user events.
+
+The two major features of AJAX allow you to do the following:
+
+- Make requests to the server without reloading the page
+- Receive and work with data from the server
+
+##3. Setting up Ajax to make purchase function: jQuery Ajax() and django
+- Create a new app, checkout
+    - write CheckoutTestView using the base view from django. This is going to handle the ajax() stuff
+    - create a checkout test.html template extend from base.html. Put a test Ajax link there.
+    - write ajax code for the block
+
+##4.Create a js folder in the static folder and separate the django crsf ajax javascripts out as a file and save it in the js folder
