@@ -301,6 +301,51 @@ Steps:
 ## 2. user apply for account
 - create a regular form for agreeing to term (no need modelform to save data)
 - use FormMixin for the generic base view (formveiw = baseview + formMixin ).Note that both get() and post() are both needed. 
-    - get() is to display empty data. check user exists and active status and add the value to the context 
+    - get() is to display empty data. check user exists and active status and add the value to the context. The logics is below. We can implent the logic either in template or in view. It is always preferred to do it in view.py and add variable to the context for view to render instead of using logic in template. 
+        - if no exists, show form
+        - if exists and no active, show pending
+        - if exists and active, show dashboard data
     - post() is to process data when user submit form.
     - form_valid() method
+    - use self.get_form() to get the form instead of hard-coded.
+
+##3. Seller Account Mixin
+- define a SellerAccountMixin
+    - define function to get account
+    - define function to get products
+    - define function to get transactions
+- use the mixin in the seller views
+- change ProductManagerMixin to be inherited from SellerAccountMixin
+
+##4. Create seller product views (CRUD)
+- should be different from just the product view
+##5. Seller redirect view
+- after editing product, the view should be redirected to the actual product detail view. 
+- use generic class based view: RedirectView
+
+
+
+# ======== Billing and Transactions (line items) app =====
+
+##1. Create a seperate app for billing, separated from checkout app. 
+- Think about the data structure built in FileMaker. The key fields are below. Notice that we have multiple foreignkey, think about using ContentType and generic foreignkey!
+    - user: ForeignKey(settings.AuthUserModel)
+    - product: ForeignKey(Product)
+    - transaction_id: foreignkey related to the payment system(e.g. BrainTree Stripe)
+    - price
+    - timestamp
+    - success
+- import and run transactions in the checkout view,if transaction successful, create a transaction object
+
+##2. on the dashboard view, create a dashboard transaction and product list
+- create template for transaction_list.html
+- include the template in the dashboard view with {% include%} tag
+
+
+# ===== Backup and restore data from database in django ===
+
+-  dump data from app into a file in json format
+    - python manage.py dumpdata products --format json --indent 4 > products_backup.json 
+-  load data
+    - python manage.py loaddata products_backup.json
+    
