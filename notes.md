@@ -237,6 +237,7 @@ in the model:
 - instead of count tags in view, we can also define a custom manager in TagView model and method to do the count. 
 
 #========= Build a dashboard view for recommendations=========
+
 Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it.
 
 ##1. Create a class based DashBoardView.py from standard generic view. First, thinking about what data you want to display on the view. and then build the view class
@@ -286,3 +287,7 @@ The two major features of AJAX allow you to do the following:
     - write ajax code for the block
 
 ##4.Create a js folder in the static folder and separate the django crsf ajax javascripts out as a file and save it in the js folder
+
+
+# ====== Seller App ====
+
