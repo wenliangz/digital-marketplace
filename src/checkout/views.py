@@ -40,7 +40,7 @@ class CheckoutAjaxView(AjaxRequiredMixin, View):
 
 class CheckoutTestView(View):
 	def post(self, request, *args, **kwargs):
-		print request.POST.get("testData")
+		print(request.POST.get("testData"))
 		if request.is_ajax():
 			# raise Http404
 			if not request.user.is_authenticated():

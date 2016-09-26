@@ -291,3 +291,16 @@ The two major features of AJAX allow you to do the following:
 
 # ====== Seller App ====
 
+## 1. Create seller app
+Steps: 
+    - model.py
+    - view.py
+    - urls.py
+    - admin.py to register app
+    - setting.py to add app
+## 2. user apply for account
+- create a regular form for agreeing to term (no need modelform to save data)
+- use FormMixin for the generic base view (formveiw = baseview + formMixin ).Note that both get() and post() are both needed. 
+    - get() is to display empty data. check user exists and active status and add the value to the context 
+    - post() is to process data when user submit form.
+    - form_valid() method
