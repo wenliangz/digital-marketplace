@@ -37,14 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'products',
-=======
     'analytics',
     'products',
     'sellers',
     'tags',
->>>>>>> 2fcb069
+
 )
 
 MIDDLEWARE_CLASSES = (
