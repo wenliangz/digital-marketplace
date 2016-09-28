@@ -236,9 +236,14 @@ in view everytime when called:
 in the model:
 - instead of count tags in view, we can also define a custom manager in TagView model and method to do the count. 
 
-#========= Build a dashboard view for recommendations=========
+#========= Build a Dashboard Views=========
 
-Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it.
+Dashboard view can be considered as a place for landing multiple views. we need to build a seperate app for it. Import all models that you need data from into the dasjboard view. So think about the information you want to display on the dashboard.
+- Sales infomation: today's sale and sales aggregation
+- ajax Rating view: setup star html, css and ajax
+- myproduct listview (user library), view the list of products by the current user(owner)
+- vendor listview, click each vendor name and show the product under that specific vendor
+- curated product view: products classified into different sessions.
 
 ##1. Create a class based DashBoardView.py from standard generic view. First, thinking about what data you want to display on the view. and then build the view class
 - tags in the reverse order of counts
@@ -340,6 +345,15 @@ Steps:
 ##2. on the dashboard view, create a dashboard transaction and product list
 - create template for transaction_list.html
 - include the template in the dashboard view with {% include%} tag
+
+
+# ===== curated products app ===
+
+
+# ===== File Upload ===
+
+- In order for the file to upload, the HTML form tags have to have "enctype" tag: enctype = 'multipart/form-data'
+- for function based view, you also have to pass request.FILE to the Form Class to create a form instance
 
 
 # ===== Backup and restore data from database in django ===
