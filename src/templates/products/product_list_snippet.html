@@ -7,11 +7,11 @@
     	{% if instance|get_thumbnail:"micro" %}
     	<a href='{{ instance.get_absolute_url }}'>
 
-    		<img src='{{ instance|get_thumbnail:"micro" }}' />
-    	</a><br/>
+    		<img src='{{ instance|get_thumbnail:"micro" }}' /></a>
+            <br/>
     	{% endif %}
     	
-    	{{ instance.price }}
+    	{{ instance.get_html_price|safe }}
    </li>
 {% empty %}
     <li>No Products yet.</li>
