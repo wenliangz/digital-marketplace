@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'products',
     'sellers',
     'tags',
+    'django_extensions',
 
 )
 

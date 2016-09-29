@@ -109,7 +109,7 @@ class ProductUpdateView(ProductManagerMixin, SubmitBtnMixin, MultiSlugMixin, Upd
 
 	def get_initial(self):
 		initial = super(ProductUpdateView,self).get_initial()
-		print initial
+		# print initial
 		tags = self.get_object().tag_set.all()
 		initial["tags"] = ", ".join([x.title for x in tags])
 		"""
@@ -164,7 +164,7 @@ class ProductDownloadView(MultiSlugMixin, DetailView):
 		if obj in request.user.myproducts.products.all():
 			filepath = os.path.join(settings.PROTECTED_ROOT, obj.media.path)
 			guessed_type = guess_type(filepath)[0]
-			wrapper = FileWrapper(file(filepath))
+			wrapper = FileWrapper(filepath)
 			mimetype = 'application/force-download'
 			if guessed_type:
 				mimetype = guessed_type
@@ -260,7 +260,7 @@ class UserLibraryListView(LoginRequiredMixin, ListView):
 def create_view(request): 
 	form = ProductModelForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
-		print form.cleaned_data.get("publish")
+		# print form.cleaned_data.get("publish")
 		instance = form.save(commit=False)
 		instance.sale_price = instance.price
 		instance.save()
@@ -327,7 +327,7 @@ def detail_view(request, object_id=None):
 
 def list_view(request):
 	# list of items
-	print request
+	# print request
 	queryset = Product.objects.all()
 	template = "list_view.html"
 	context = {
